@@ -1,0 +1,69 @@
+def dot(s, p):
+    
+    if len(s) != len(p):
+        return False
+    else:
+        for i in range(len(s)):
+            if s[i] != p[i] and p[i] != ".":
+                return False
+    return True
+
+
+def can_we_make(s, substrings):
+    substring_count = []
+    for i in range(len(substrings)):
+        
+        if (not substrings[i] in s) and (substrings[i] != "."):
+            return False
+        
+        substring_count.append(s.count(substrings[i]))
+        
+    
+    acc = ""
+    for i in range(len(substrings)):
+        for j in range(substring_count[i]):
+            acc += substrings[i]
+
+            
+    print(acc)
+    return dot(s, acc)
+    
+
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        
+        #if s[0] != p[0] or p[0] != ".":
+            #return False
+        
+        substrings = []
+        for i in range(len(p)):
+            if p[i] == "*":
+                #traverse backwards from here till we hit another * or reach the end
+                #of the string
+                #then append it to substrings
+                #(make sure the order is the same as it appears in p)
+                acc = ""
+                j = i - 1
+                while p[j] != "*" and j >= 0:
+                    
+                    acc = p[j] + acc
+                    
+                    
+                    j -= 1
+                    
+                substrings.append(acc)
+                
+        print(substrings)
+
+        
+        if len(substrings) == 0: #no asterisks
+            return dot(s, p)
+        else:
+            return can_we_make(s, substrings)
+            
+            
