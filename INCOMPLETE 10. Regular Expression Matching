@@ -1,5 +1,8 @@
 def dot(s, p):
     
+    if p == ".":
+        return True
+    
     if len(s) != len(p):
         return False
     else:
@@ -19,15 +22,21 @@ def can_we_make(s, substrings):
         substring_count.append(s.count(substrings[i]))
         
     
+    
     acc = ""
     for i in range(len(substrings)):
-        for j in range(substring_count[i]):
+        if (substrings[i] != "."):
+            for j in range(substring_count[i]):
+                acc += substrings[i]
+                
+        else:
             acc += substrings[i]
 
             
     print(acc)
     return dot(s, acc)
     
+
 
 class Solution(object):
     def isMatch(self, s, p):
@@ -63,6 +72,7 @@ class Solution(object):
         
         if len(substrings) == 0: #no asterisks
             return dot(s, p)
+        
         else:
             return can_we_make(s, substrings)
             
