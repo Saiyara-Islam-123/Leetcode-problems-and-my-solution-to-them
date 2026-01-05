@@ -76,4 +76,3 @@ class Solution(object):
         else:
             return can_we_make(s, substrings)
             
-            
